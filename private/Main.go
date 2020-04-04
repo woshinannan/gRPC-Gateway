@@ -12,6 +12,7 @@ import (
 	"net"
 	"net/http"
 	"sync"
+	"github.com/jeanphorn/log4go"
 )
 
 const PORT = ":9192"
@@ -49,11 +50,14 @@ func GatewayStart() error {
 }
 
 func main() {
+	log4go.LoadConfiguration("../config/logConfig.json")
+
 	var wg sync.WaitGroup	// 计数器，计数器不为0时当前线程一直阻塞
 
 	go GRPCStart()
 
 	go GatewayStart()
+
 
 	wg.Add(1)
 
