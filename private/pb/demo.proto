@@ -1,0 +1,21 @@
+syntax = "proto3";
+package pb;
+
+import "google/api/annotations.proto";
+
+message ReqMsg {
+  int64 Age = 1;
+  string Name = 2;
+}
+
+message RspMsg {
+  string Age_Name = 1;
+}
+service MyServiceName {
+    rpc Echo(ReqMsg) returns (RspMsg) {
+        option (google.api.http) = {
+           post: "/echo"
+           body: "*"
+       };
+    }
+}
